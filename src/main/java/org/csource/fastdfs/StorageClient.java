@@ -376,7 +376,13 @@ public class StorageClient extends StorageClientInternal {
         }
     }
 
-  public String uploadStream(String group_name,
+    public String uploadInputStream(
+                                    String local_filename, String file_ext_name,
+                                    InputStream is, long length,
+                                    NameValuePair[] meta_list) throws IOException, MyException {
+        return this.uploadInputStream(null, local_filename, file_ext_name, is, length, meta_list);
+    }
+  public String uploadInputStream(String group_name,
                              String local_filename, String file_ext_name,
                              InputStream is, long length,
                              NameValuePair[] meta_list) throws IOException, MyException {
