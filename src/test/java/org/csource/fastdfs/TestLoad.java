@@ -91,7 +91,7 @@ public class TestLoad {
 
     public int uploadFile() throws Exception {
       StorageServer storageServer = null;
-      StorageClient1 client = new StorageClient1(trackerServer, storageServer);
+      StorageClient client = new StorageClient(trackerServer, storageServer);
       byte[] file_buff;
       String file_id;
 
@@ -99,7 +99,7 @@ public class TestLoad {
       java.util.Arrays.fill(file_buff, (byte) 65);
 
       try {
-        file_id = client.upload_file1(file_buff, "txt", null);
+        file_id = client.uploadFile(file_buff, "txt", null);
         if (file_id == null) {
           System.out.println("upload file fail, error code: " + client.getErrorCode());
           return -1;
@@ -134,10 +134,10 @@ public class TestLoad {
     public int downloadFile(String file_id) throws Exception {
       int errno;
       StorageServer storageServer = null;
-      StorageClient1 client = new StorageClient1(trackerServer, storageServer);
+      StorageClient client = new StorageClient(trackerServer, storageServer);
 
       try {
-        errno = client.download_file1(file_id, this.callback);
+        errno = client.downloadFile(file_id, this.callback);
         if (errno != 0) {
           System.out.println("Download file fail, file_id: " + file_id + ", error no: " + errno);
         }

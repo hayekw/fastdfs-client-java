@@ -65,7 +65,7 @@ public class TestClient {
   		}
   		*/
 
-            StorageClient client = new StorageClient(trackerServer, storageServer);
+            StorageClientInternal client = new StorageClientInternal(trackerServer, storageServer);
             byte[] file_buff;
             NameValuePair[] meta_list;
             String[] results;
@@ -195,7 +195,7 @@ public class TestClient {
 
                 group_name = results[0];
                 remote_filename = results[1];
-                file_id = group_name + StorageClient1.SPLIT_GROUP_NAME_AND_FILENAME_SEPERATOR + remote_filename;
+                file_id = group_name + StorageClient.SPLIT_GROUP_NAME_AND_FILENAME_SEPERATOR + remote_filename;
 
                 inetSockAddr = trackerServer.getInetSocketAddress();
                 file_url = "http://" + inetSockAddr.getAddress().getHostAddress();

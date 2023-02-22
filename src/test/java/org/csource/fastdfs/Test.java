@@ -47,16 +47,16 @@ public class Test {
       TrackerClient tracker = new TrackerClient();
       TrackerServer trackerServer = tracker.getTrackerServer();
       StorageServer storageServer = null;
-      StorageClient1 client = new StorageClient1(trackerServer, storageServer);
+      StorageClient client = new StorageClient(trackerServer, storageServer);
 
       NameValuePair[] metaList = new NameValuePair[1];
       metaList[0] = new NameValuePair("fileName", local_filename);
-      String fileId = client.upload_file1(local_filename, null, metaList);
+      String fileId = client.uploadFile(local_filename, null, metaList);
       System.out.println("upload success. file id is: " + fileId);
 
       int i = 0;
       while (i++ < 10) {
-        byte[] result = client.download_file1(fileId);
+        byte[] result = client.downloadFile(fileId);
         System.out.println(i + ", download result is: " + result.length);
       }
     } catch (Exception ex) {

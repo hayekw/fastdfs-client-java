@@ -21,7 +21,7 @@ public class FdfsTest {
 
     private static final String CONF_NAME = "fdfstest.conf";
 
-    private StorageClient storageClient;
+    private StorageClientInternal storageClientInternal;
 
     private TrackerServer trackerServer;
 
@@ -33,15 +33,15 @@ public class FdfsTest {
         TrackerClient tracker = new TrackerClient();
         trackerServer = tracker.getTrackerServer();
         StorageServer storageServer = null;
-        storageClient = new StorageClient(trackerServer, storageServer);
+        storageClientInternal = new StorageClientInternal(trackerServer, storageServer);
     }
 
     @After
     public void closeClient() {
         LOGGER.info("close connection");
-        if(storageClient != null){
+        if(storageClientInternal != null){
             try {
-               storageClient.close();
+               storageClientInternal.close();
             }catch (Exception e){
                 e.printStackTrace();
             }catch (Throwable e){
@@ -80,7 +80,7 @@ public class FdfsTest {
         int length = inputStream.available();
         byte[] bytes = new byte[length];
         inputStream.read(bytes);
-        String[] result = storageClient.upload_file(bytes, null, metaList);
+        String[] result = storageClientInternal.upload_file(bytes, null, metaList);
         LOGGER.info("result {}", Arrays.asList(result));
         Assert.assertEquals(2, result.length);
     }
@@ -88,7 +88,7 @@ public class FdfsTest {
     @Test
     public void download() throws Exception {
         String[] uploadresult = {"group1", "M00/00/00/J2fL12PVypeAWiGcAAM_gDeWVyw5817085"};
-        byte[] result = storageClient.download_file(uploadresult[0], uploadresult[1]);
+        byte[] result = storageClientInternal.download_file(uploadresult[0], uploadresult[1]);
         String local_filename = "commitment.d2f57e10.jpg";
         writeByteToFile(result, local_filename);
         File file = new File(local_filename);
@@ -105,12 +105,12 @@ public class FdfsTest {
         int length = inputStream.available();
         byte[] bytes = new byte[length];
         inputStream.read(bytes);
-        String[] result = storageClient.upload_file(bytes, null, metaList);
+        String[] result = storageClientInternal.upload_file(bytes, null, metaList);
         //Assert.assertTrue(storageClient.isConnected());
         // pool testOnborrow  isAvaliable
        // Assert.assertTrue(storageClient.isAvaliable());
         LOGGER.info("result {}", Arrays.asList(result));
-        byte[] resultbytes = storageClient.download_file(result[0], result[1]);
+        byte[] resultbytes = storageClientInternal.download_file(result[0], result[1]);
         writeByteToFile(resultbytes, local_filename);
         File downfile = new File(local_filename);
         Assert.assertTrue(downfile.isFile());

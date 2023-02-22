@@ -49,10 +49,10 @@ public class Test1 {
                 System.out.println("getStoreStorage return null");
             }
 
-            StorageClient1 sc1 = new StorageClient1(ts, ss);
+            StorageClient sc1 = new StorageClient(ts, ss);
 
             NameValuePair[] meta_list = null;  //new NameValuePair[0];
-            String fileid = sc1.upload_file1(local_filename, ext_name, meta_list);
+            String fileid = sc1.uploadFile(local_filename, ext_name, meta_list);
             System.out.println("Upload local file " + local_filename + " ok, fileid: " + fileid);
         } catch (Exception ex) {
             ex.printStackTrace();

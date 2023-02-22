@@ -478,7 +478,7 @@ public class TrackerClient {
      */
     public StorageServer getFetchStorage1(TrackerServer trackerServer, String file_id) throws IOException, MyException {
         String[] parts = new String[2];
-        this.errno = StorageClient1.split_file_id(file_id, parts);
+        this.errno = StorageClient.splitFileId(file_id, parts);
         if (this.errno != 0) {
             return null;
         }
@@ -495,7 +495,7 @@ public class TrackerClient {
      */
     public ServerInfo[] getFetchStorages1(TrackerServer trackerServer, String file_id) throws IOException, MyException {
         String[] parts = new String[2];
-        this.errno = StorageClient1.split_file_id(file_id, parts);
+        this.errno = StorageClient.splitFileId(file_id, parts);
         if (this.errno != 0) {
             return null;
         }
